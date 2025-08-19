@@ -5,7 +5,10 @@ from django.http import JsonResponse
 
 # Create your views here.
 def Cart_summary(request):
-    return render(request, 'Cart_summary.html', {})
+    cart = Cart(request)
+    #get the products in the cart
+    cart_products = cart.get_prods()
+    return render(request, 'Cart_summary.html', {'cart_products': cart_products})
 
 def Cart_add(request):
     #get the cart
@@ -14,14 +17,15 @@ def Cart_add(request):
     if request.POST.get('action') == 'post':
         #get the product 
         product_id = int(request.POST.get('product_id'))
+        product_qty = int(request.POST.get('product_qty'))
         #lookup product in DB
         product = get_object_or_404(Product, id=product_id)
         #SAVE TO SESSION
-        cart.add(product=product)
+        cart.add(product=product, quantity = product_qty)
 
         cart_quantity = cart.__len__()
         #return JsonResponse
-        response = JsonResponse({'qty': cart_quantity}, {'price': Product.price})
+        response = JsonResponse({'qty': cart_quantity}, )
         return response
     
 

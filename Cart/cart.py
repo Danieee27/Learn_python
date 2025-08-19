@@ -1,3 +1,5 @@
+from Store.models import Product
+
 class Cart():
     def __init__(self, request):
         self.session = request.session
@@ -13,16 +15,24 @@ class Cart():
 
     def add(self, product):
         product_id = str(product.id)
+        product_qty = str(quantity)
 
     #Logic
         if product_id in self.cart:
             pass
         else:
-            self.cart[product_id] = { "price": str(product.price),
-            }
+            #self.cart[product_id] = { "price": str(product.price),
+            
+            self.cart[product_id] = int(product_qty)
 
         #update session 
         self.session.modified = True
 
     def __len__(self):
         return len(self.cart)
+    
+    def get_prods(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+
+        return products

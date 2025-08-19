@@ -18,9 +18,19 @@
               <br>
               <center>
               <h5 class="card-title">₦{{ product.price}}</h5>
+              <div class="row justify-centont-center">
+                <div class = "col-md-2">Quantity:</div>
+                <div class = "col-md-2">
+                <select class="form-select" id = "qty-cart">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                </div>
+              </div>
               <a href = "{% url 'home' %}" class = "btn btn-secondary">Home</a>
               <button type = "button" class = "btn btn-secondary" value = "{{ product.id }}" id = "add-cart">Add to Cart</button>
-              <h4>ID: {{ product.id }}</h4>
+              
             </center>
             </div>
           </div>
@@ -49,6 +59,7 @@ $(document).on('click', "#add-cart", function(e){
     url: "{% url 'Cart_add' %}",
     data: {
       product_id: $('#add-cart').val(),
+      product_qty: $('#qty-cart option:selected').text(),
       csrfmiddlewaretoken: "{{ csrf_token }}",
       action: 'post'
     },

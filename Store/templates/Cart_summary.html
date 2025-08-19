@@ -10,39 +10,37 @@
                 </div>
             </div>
         </header>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    
-                    {% for product in products %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src= "{{ product.image.url }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ product.name }}</h5>
-                                    <!-- Product price-->
-                                    
-                                    ₦{{ product.price }}
-                                    <br/>
-                                    Available in sizes: {{ product.description }}
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">About Product</a></div>
-                            </div>
+       <div class = "container">
+            {% if cart_products %}
+                {% for product in cart_products %}
+
+            <div class = "container">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+                      </div>
+                      
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title" align = "center">{{ product.name }}</h5>
+                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                          <br>
+                          <center>
+                          <h5 class="card-title">₦{{ product.price}}</h5>
+                          <a href = "{% url 'home' %}" class = "btn btn-secondary">Home</a>
+                         
+                          
+                        </center>
                         </div>
+                      </div>
                     </div>
-                    {% endfor %}
+                  </div>
 
-
-                </div>
-            </div>
-        </section>
+                {% endfor %}
+            {% else %}
+                <br/><p>Your cart is empty.</p>
+            {% endif %}
+       </div>
         <!-- Footer-->
 {% endblock %}        
