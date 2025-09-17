@@ -10,6 +10,7 @@
                 </div>
             </div>
         </header>
+      </br>
        <div class = "container">
             {% if cart_products %}
                 {% for product in cart_products %}
@@ -27,9 +28,37 @@
                           <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                           <br>
                           <center>
-                          <h5 class="card-title">₦{{ product.price}}</h5>
+                          <h5 class="card-title">₦{{ product.price }}</h5>
+                          </br>
+                          <div class="row justify-content-center">
+                            <div class = "col-md-2">Quantity:</div>
+                            <div class = "col-md-2">
+                            <select class="form-select form-select-sm" id = "select{{product.id}}">
+                              <option selected>
+                                {% for key, value in quantities.items %}
+                                  {% if key == product.id|slugify %}
+                                    {{ value}}
+                                  {% endif %}
+                                {% endfor %}
+                              </option>
+
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                            </select>
+                            </div>
+                          </div>
+                        </br>
                           <a href = "{% url 'home' %}" class = "btn btn-secondary">Home</a>
-                         
+                          <button type = "button" data-index = "{{ product.id }}" class = "btn btn-secondary update-cart">Update</button>
+                          <button type = "button" data-index = "{{ product.id }}" class = "btn btn-danger delete-product">Remove</button                        
                           
                         </center>
                         </div>
@@ -38,9 +67,69 @@
                   </div>
 
                 {% endfor %}
+                <div align = "right">
+                <h3>Total:  ₦{{ totals }}</h3>
+                <a href = "{% url 'checkout' %}" class = "btn btn-primary" onclick = "this.style.backgroundColor = 'green'">Checkout</a>
+                </div>
             {% else %}
                 <br/><p>Your cart is empty.</p>
             {% endif %}
        </div>
+      </br></br></br></br></br></br></br>
         <!-- Footer-->
-{% endblock %}        
+
+
+<script>
+$(document).on('click', ".update-cart", function(e){
+  e.preventDefault();
+  //grab the product id
+  var productid = $(this).data('index');
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'Cart_update' %}",
+    data: {
+      product_id: $(this).data('index'),
+      product_qty: $('#select' + productid + 'option:selected').text(),
+      csrfmiddlewaretoken: "{{ csrf_token }}",
+      action: 'post'
+    },
+
+    success: function(json){
+      //console.log(json);
+      location.reload();
+    },
+    error: function(xhr, errmsg, err) {
+
+    }
+
+  });
+})
+</script>
+
+
+<script>
+$(document).on('click', ".delete-product", function(e){
+  e.preventDefault();
+  //grab the product id
+  //var product_id = $(this).data('index');
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'Cart_delete' %}",
+    data: {
+      product_id: $(this).data('index'),
+      csrfmiddlewaretoken: "{{ csrf_token }}",
+      action: 'post'
+    },
+
+    success: function(json){
+      //console.log(json);
+      location.reload();
+    },
+    error: function(xhr, errmsg, err) {
+
+    }
+
+  });
+})
+</script>
+{% endblock %}

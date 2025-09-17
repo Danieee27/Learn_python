@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class = "container">
+    <div class = "row">
+        <center>
+            <div class="col-8">
+                </br></br>
+<h3>Order</h3>
+<br/>
+<div class="card">
+  <div class="card-header">
+    Order {{ order.id }} - ₦{{ order.amount_paid }} - {{ order.date_ordered }}
+  </div>
+  <div class="card-body">
+    Email: {{ order.email }}<br/>
+    {% if order.date_shipped %}
+        Date Shipped: {{ order.date_shipped}}<br/>
+    {% else %}
+        Date Ordered: {{ order.date_ordered}}
+    {% endif %}
+    <br/>
+    {{ order.full_name}}
+    <pre>{{ order.shipping_address}}</pre>
+    <br/>
+    {% for item in items %}
+        {{ item.product }} - {{ item.quantity }} - ₦{{ item.price }}
+ 
+    {% endfor %}
+    <br/><br/>
+ 
+
+
+  </div>
+</div>
+<br/>
+    <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+
+</br></br>
+            </div>
+        </center>
+    </div>
+</div>
+
+{% endblock %}
