@@ -17,8 +17,8 @@ SECRET_KEY = 'django-insecure-pt3oicyguu@e+sjl=igg(@(13w0a-px(akj+-rwdozd8d^(ql5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hkbxmbehplttvctbmxws.supabase.co', 'https://hkbxmbehplttvctbmxws.supabase.co']
-CSRF_TRUSTED_ORIGINS = [ 'https://hkbxmbehplttvctbmxws.supabase.co']
+ALLOWED_HOSTS = ['learnpython-production-c9dd.up.railway.app', 'https://learnpython-production-c9dd.up.railway.app']
+CSRF_TRUSTED_ORIGINS = [ 'https://learnpython-production-c9dd.up.railway.app']
 
 # Application definition
 
