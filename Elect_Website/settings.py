@@ -17,8 +17,8 @@ SECRET_KEY = 'django-insecure-pt3oicyguu@e+sjl=igg(@(13w0a-px(akj+-rwdozd8d^(ql5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['https://hkbxmbehplttvctbmxws.supabase.co', 'https://https://hkbxmbehplttvctbmxws.supabase.co']
+CSRF_TRUSTED_ORIGINS = ['https://hkbxmbehplttvctbmxws.supabase.co', 'https://https://hkbxmbehplttvctbmxws.supabase.co']
 
 # Application definition
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'Store',
     'Cart',
     'payment',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -42,6 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleWare',
 ]
 
 ROOT_URLCONF = 'Elect_Website.urls'
@@ -112,6 +114,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = ['static/']
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR/'staticfiles'
+
+#whitenoise static stuff
 
 
 MEDIA_URL = 'media/'
