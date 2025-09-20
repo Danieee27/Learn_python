@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-pt3oicyguu@e+sjl=igg(@(13w0a-px(akj+-rwdozd8d^(ql5
 DEBUG = True
 
 ALLOWED_HOSTS = ['hkbxmbehplttvctbmxws.supabase.co', 'https://hkbxmbehplttvctbmxws.supabase.co']
-CSRF_TRUSTED_ORIGINS = [ 'https://https://hkbxmbehplttvctbmxws.supabase.co']
+CSRF_TRUSTED_ORIGINS = [ 'https://hkbxmbehplttvctbmxws.supabase.co']
 
 # Application definition
 
